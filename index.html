@@ -217,7 +217,7 @@
               <h5 class="card-title">Reminders</h5>
               <p class="card-text">Schedule one-time reminders which are sent via DMs.</p>
               <br>
-              <p class="card-text">Available features:</p>
+              <p class="card-text"><u>Available features</u>:</p>
               <p class="card-text">1. 🔔 <b>/remind_me</b>: Creates a reminder with the desired text and time for the notification.</p>
               <p class="card-text"><u>Coming Soon</u>:</p>
               <p class="card-text">(new features placeholder)</p>
@@ -229,6 +229,13 @@
             <div class="card-body">
               <h5 class="card-title">Routines</h5>
               <p class="card-text">Set up recurring daily or weekly routines which you will be notified by the App via DMs.</p>
+              <br>
+              <p class="card-text"><u>Available features</u>:</p>
+              <p class="card-text">1. ➕ <b>/add_routine</b>: Creates a daily or weekly routine which you are notified with the added text via DMs either daily or on specified weekdays.</p>
+              <p class="card-text">2. ⚙️ <b>/routines_settings</b>: You can delete specific daily or weekly added routines.</p>
+              <p class="card-text">3. 🗑️ <b>/delete_all_routines</b>: Easily delete all of the added daily or weekly routines for a fresh start!</p>
+              <p class="card-text"><u>Coming Soon</u>:</p>
+              <p class="card-text">(new features placeholder)</p>
             </div>
           </div>
         </div>
@@ -343,7 +350,6 @@
         }
       });
 
-      // Optional: clear image on close (to prevent flashes or stale content)
       screenshotModal.addEventListener('hidden.bs.modal', function () {
         modalImg.src = '';
         modalImg.alt = '';
