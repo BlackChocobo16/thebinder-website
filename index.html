@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta and Title -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planner Discord App</title>
+  
+  <!-- Icon -->
+  <link rel="icon" type="image/x-icon" href="/images/bot_icon.png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Aq3+..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-image: url('images/hero_background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 60vh;
+      position: relative;
+    }
+
+    .hero-card {
+      background-color: white;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Cards & Buttons */
+    .feature-card {
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-text {
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+    }
+
+    .btn-discord {
+      background-color: #5865F2;
+      color: white;
+    }
+
+    .btn-discord:hover {
+      background-color: #4752c4;
+    }
+
+    .bot-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+
+    .bot-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .description-box,
+    .modal-content {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    /* Screenshots */
+    img.screenshot {
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .screenshots-section,
+    .faq-section {
+      background-color: #f8f9fa;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1e1e2f;
+      color: white;
+      padding: 30px 0;
+    }
+
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .card,
+    body.dark-mode .hero-card,
+    body.dark-mode .accordion-button,
+    body.dark-mode .description-box,
+    body.dark-mode .modal-content {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode footer {
+      background-color: #0d0d0d;
+    }
+
+    body.dark-mode .bot-logo {
+      filter: brightness(0.9);
+    }
+
+    body.dark-mode .screenshots-section,
+    body.dark-mode .faq-section {
+      background-color: #1a1a1a;
+    }
+
+    body.dark-mode .accordion-button:not(.collapsed) {
+      background-color: #2a2a2a;
+    }
+
+    body.dark-mode .accordion-body {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark Mode Toggle -->
+  <button class="btn btn-outline-light theme-toggle" onclick="toggleDarkMode()">🌙</button>
+
+  <!-- Hero Section -->
+  <section class="hero d-flex justify-content-center align-items-center py-5">
+    <div class="card hero-card shadow text-center p-4">
+      <div class="card-body">
+        <img src="images/bot_logo.png" alt="Bot Logo" class="bot-logo mb-3">
+        <h1 class="display-5">The Binder</h1>
+        <p class="lead">Your personal Discord planner</p>
+        <button class="btn btn-discord btn-lg m-2" data-bs-toggle="modal" data-bs-target="#inviteModal">
+          Invite Bot
+        </button>
+        <a href="https://discord.gg/yVFStz2xCf" target="_blank" class="btn btn-outline-secondary btn-lg m-2">Join Support</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Description Section -->
+  <section class="py-5 description-section">
+    <div class="container text-center">
+      <h2 class="mb-4">Description</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-15">
+          <div class="card feature-card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">
+                Built using <a href="https://discordpy.readthedocs.io/en/stable/">Discord.py</a>
+              </h5>
+              <p class="card-text">
+                The Binder is a task manager built specifically for Discord which can record various tasks which you have to do, set up reminders or daily/weekly routines. It is deeply integrated with neat elements like per user data, embedding, dropdown menus and many more!
+              </p>
+              <p class="card-text">More features coming soon!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5">
+    <div class="container text-center">
+      <h2 class="mb-4">Features</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card feature-card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Task Management</h5>
+              <p class="card-text">Create, view, and manage to-do lists and tasks in your server.</p>
+              <br>
+              <p class="card-text"><u>Available features</u>:</p>
+              <p class="card-text">1. 📝 <b>/add_task</b>: Creates a new task for the user</p>
+              <p class="card-text">2. 📋 <b>/list_tasks</b>: Shows all of the user's registered tasks</p>
+              <p class="card-text">3. ✏️ <b>/update_task</b>: Used to update active tasks with new details or new due date</p>
+              <p class="card-text">4. ✅ <b>/complete_task</b>: Used when a specific task has been complete so it doesn't show anymore in the active tasks list</p>
+              <br>
+              <p class="card-text"><u>Coming Soon</u>:</p>
+              <p class="card-text">(new features placeholder)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Reminders</h5>
+              <p class="card-text">Schedule one-time reminders which are sent via DMs.</p>
+              <br>
+              <p class="card-text">Available features:</p>
+              <p class="card-text">1. 🔔 <b>/remind_me</b>: Creates a reminder with the desired text and time for the notification.</p>
+              <p class="card-text"><u>Coming Soon</u>:</p>
+              <p class="card-text">(new features placeholder)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Routines</h5>
+              <p class="card-text">Set up recurring daily or weekly routines which you will be notified by the App via DMs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section class="py-5 screenshots-section">
+    <div class="container text-center">
+      <h2 class="mb-4">Screenshots</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="card-title">📋 Task Management</h5>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#screenshotModal" data-img="images/tasks_screenshot.jpg" data-alt="Task Management Screenshot">
+            <img src="images/tasks_screenshot.jpg" class="img-fluid screenshot" alt="Task Management Screenshot">
+          </a>
+        </div>
+        <div class="col-md-4">
+          <h5 class="card-title">🔔 Reminders</h5>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#screenshotModal" data-img="images/reminders_screenshot.png" data-alt="Reminders Screenshot">
+              <img src="images/reminders_screenshot.png" class="img-fluid screenshot" alt="Reminders Screenshot">
+            </a>
+        </div>
+        <div class="col-md-4">
+          <h5 class="card-title">📆 Routines</h5>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#screenshotModal" data-img="images/routines_screenshot.png" data-alt="Routines Screenshot">
+              <img src="images/routines_screenshot.png" class="img-fluid screenshot" alt="Routines Screenshot">
+            </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-5 faq-section">
+    <div class="container">
+      <h2 class="text-center mb-4">FAQ</h2>
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+              How do I invite the bot?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Use the "Invite Bot" button at the top to add the bot to your server.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+              Is the bot free?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes! The core features are completely free to use.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p>2025 The Binder by @blackchocobo</p>
+      <div class="d-flex justify-content-center gap-3 mt-2">
+        <a href="https://github.com/BlackChocobo16" class="text-light fs-4" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://bsky.app/profile/blackchocobo16.bsky.social" target="_blank" aria-label="Bluesky">
+          <img src="images/bluesky.png" alt="Bluesky" width="40" height="40"/>
+        </a>
+        <a href="https://discord.com/users/305733319700512769" class="text-light fs-4" target="_blank" aria-label="Discord">
+          <i class="fab fa-discord"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+      }
+    };
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const screenshotModal = document.getElementById('screenshotModal');
+      const modalImg = document.getElementById('screenshotModalImage');
+
+      screenshotModal.addEventListener('show.bs.modal', function (event) {
+        const trigger = event.relatedTarget;
+        if (trigger) {
+          const imgSrc = trigger.getAttribute('data-img');
+          const imgAlt = trigger.getAttribute('data-alt');
+          modalImg.src = imgSrc;
+          modalImg.alt = imgAlt;
+        }
+      });
+
+      // Optional: clear image on close (to prevent flashes or stale content)
+      screenshotModal.addEventListener('hidden.bs.modal', function () {
+        modalImg.src = '';
+        modalImg.alt = '';
+      });
+    });
+  </script>
+
+  <!-- Invite Modal -->
+  <div class="modal fade" id="inviteModal" tabindex="-1" aria-labelledby="inviteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center position-relative">
+        <div class="modal-body py-5">
+          <h4>🚧 Coming Soon</h4>
+          <p>Global deployment of the bot is still in the works.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot Modal -->
+  <div class="modal fade" id="screenshotModal" tabindex="-1" aria-labelledby="screenshotModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-transparent border-0">
+        <div class="modal-body text-center p-0">
+          <img id="screenshotModalImage" src="" alt="" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
